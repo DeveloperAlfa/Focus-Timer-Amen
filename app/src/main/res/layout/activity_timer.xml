@@ -24,6 +24,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appIcon">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/nunito_sans_extralight"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textAllCaps="true"
+            android:text="Stay Focused!"
+            />
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,17 +62,34 @@
                 android:textStyle="bold"/>
         </RelativeLayout>
     </LinearLayout>
-    <ImageButton
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="40dp"
-        android:id="@+id/cancelBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/close"
-        android:background="@color/black"
-
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/buttonLL">
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:layout_margin="40dp"
+            android:id="@+id/cancelBtn"
+            android:src="@drawable/close"
+            android:background="@color/black"
+            />
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:layout_margin="40dp"
+            android:id="@+id/MuteBtn"
+            android:src="@drawable/sound"
+            android:background="@color/black"
+            />
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

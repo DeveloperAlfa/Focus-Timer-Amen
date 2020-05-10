@@ -7,6 +7,7 @@ import androidx.core.app.NotificationManagerCompat;
 import android.animation.ObjectAnimator;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -18,11 +19,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class Timer extends AppCompatActivity {
     TextView remainingTime;
     NotificationCompat.Builder builder;
     NotificationManagerCompat notificationManager;
-    ImageButton cancel;
+    ImageButton cancel, mute;
+    MediaPlayer mp;
+    int aud;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +38,17 @@ public class Timer extends AppCompatActivity {
         progressBar.setMax((int) duration/1000);
         ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", 0, (int) duration/1000); // see this max value coming back here, we animate towards that value
         animation.setDuration(duration); // in milliseconds
-        animation.setInterpolator(new DecelerateInterpolator());
+        //animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
+        final ArrayList<Integer> audio = new ArrayList<>();
+        audio.add(R.raw.forest);
+        audio.add(R.raw.amb);
+
+        aud = 0;
+        mp = MediaPlayer.create(this, Integer.parseInt(audio.get(aud).toString()));
+        aud = 1-aud;
+        mp.setLooping(true);
+        mp.start();
         remainingTime = findViewById(R.id.remainingTime);
         CountDownTimer myTimer = new CountDownTimer(duration, 1000) {
             @Override
@@ -62,10 +76,16 @@ public class Timer extends AppCompatActivity {
                         .setOngoing(false)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
                 notificationManager.notify(1, builder.build());
+                MediaPlayer mp2 = MediaPlayer.create(Timer.this, R.raw.bell);
+                mp2.setLooping(false);
+                mp2.start();
+                mp.release();
+                startActivity(new Intent(Timer.this, MainActivity.class));
             }
         };
         myTimer.start();
         cancel = findViewById(R.id.cancelBtn);
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,5 +94,30 @@ public class Timer extends AppCompatActivity {
                 finish();
             }
         });
+        mute = findViewById(R.id.MuteBtn);
+        mute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mp.isPlaying())
+                {
+                    mp.pause();
+                    mute.setImageResource(R.drawable.mute);
+                }
+                else
+                {
+                    mute.setImageResource(R.drawable.sound);
+                    mp = MediaPlayer.create(Timer.this, Integer.parseInt(audio.get(aud).toString()));
+                    aud = 1-aud;
+                    mp.start();
+                }
+
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mp.release();
     }
 }
