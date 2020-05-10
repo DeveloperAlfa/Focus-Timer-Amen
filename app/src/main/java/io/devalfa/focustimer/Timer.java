@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -47,7 +48,7 @@ public class Timer extends AppCompatActivity {
 
 
         window.setStatusBarColor(getResources().getColor(R.color.black));
-        long duration = getIntent().getLongExtra("time", 0);
+        long duration = getIntent().getLongExtra("time", 20);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         Long tsLong = System.currentTimeMillis()/1000;
         progressBar.setMax((int) duration/1000);
@@ -81,19 +82,16 @@ public class Timer extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                notificationManager.cancelAll();
-                PendingIntent pendingIntent2 = PendingIntent.getActivity(Timer.this, 0, new Intent(Timer.this, MainActivity.class), PendingIntent.FLAG_NO_CREATE);
-                builder = new NotificationCompat.Builder(Timer.this, "one")
-                        .setSmallIcon(R.drawable.circular)
-                        .setContentTitle("Pomodoro Completed")
-                        .setContentText("Time to celebrate")
-                        .setContentIntent(pendingIntent2)
-                        .setOngoing(false)
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                notificationManager.notify(1, builder.build());
-                MediaPlayer mp2 = MediaPlayer.create(Timer.this, R.raw.bell);
-                mp2.setLooping(false);
-                mp2.start();
+                //notificationManager.cancelAll();
+                mp.stop();
+                mp = MediaPlayer.create(Timer.this, R.raw.bell);
+                mp.start();
+                while(mp.isPlaying())
+                {
+                    Log.d("Music", "onFinish: fin");
+                    SystemClock.sleep(1000);
+                }
+                mp.stop();
                 mp.release();
                 startActivity(new Intent(Timer.this, MainActivity.class));
             }
