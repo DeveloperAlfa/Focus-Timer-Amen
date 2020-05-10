@@ -36,7 +36,7 @@ public class Timer extends AppCompatActivity {
         ProgressBar progressBar = findViewById(R.id.progressBar);
         Long tsLong = System.currentTimeMillis()/1000;
         progressBar.setMax((int) duration/1000);
-        ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", 0, (int) duration/1000); // see this max value coming back here, we animate towards that value
+        ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", 10, (int) duration/1000); // see this max value coming back here, we animate towards that value
         animation.setDuration(duration); // in milliseconds
         //animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
