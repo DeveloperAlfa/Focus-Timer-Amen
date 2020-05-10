@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/NameLL"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/appIcon"
+            android:transitionName="appIconTransition"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:src="@mipmap/ic_launcher" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:id="@+id/appName"
+            android:src="@mipmap/app_name"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/appIcon"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/NameLL"
+        android:layout_margin="50dp"
+        app:layout_constraintBottom_toTopOf="@id/knowmoreLL"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:id="@+id/NameET"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:fontFamily="@font/nunito_sans_black"
+            android:hint="@string/enter_name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@drawable/edit_text"
+            android:layout_margin="10dp"
+            android:textColorHint="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/SubmitNameButton"
+            android:background="@drawable/button_inactive"
+            android:fontFamily="@font/nunito_sans_black"
+            android:enabled="false"
+            android:text="Let's Focus"
+            android:textAllCaps="false"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:id="@+id/knowmoreLL"
+        app:layout_constraintBottom_toTopOf="@id/moreLL"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="@font/nunito_sans_black"
+            android:text="What's Pomodoro?"
+            android:textColor="@color/gray"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/moreLL"
+        android:animateLayoutChanges="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/moreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/nunito_sans_extralight"
+            android:text="@string/more"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/moreArrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/nunito_sans_extralight"
+            android:text="^"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/moreHide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans_extralight"
+            android:text="Hide"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
