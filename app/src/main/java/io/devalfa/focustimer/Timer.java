@@ -108,6 +108,7 @@ public class Timer extends AppCompatActivity {
                     mute.setImageResource(R.drawable.sound);
                     mp = MediaPlayer.create(Timer.this, Integer.parseInt(audio.get(aud).toString()));
                     aud = 1-aud;
+                    mp.setLooping(true);
                     mp.start();
                 }
 
