@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Timer" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="portrait"></activity>
-        <activity android:name=".ChooseTimer" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ChooseTimer" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

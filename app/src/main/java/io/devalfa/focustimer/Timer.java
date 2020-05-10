@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -29,9 +31,22 @@ public class Timer extends AppCompatActivity {
     MediaPlayer mp;
     int aud;
     @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
+        Window window = getWindow();
+
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+
+        window.setStatusBarColor(getResources().getColor(R.color.black));
         long duration = getIntent().getLongExtra("time", 0);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         Long tsLong = System.currentTimeMillis()/1000;
